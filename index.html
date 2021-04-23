@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+
+    <link rel="icon" href="https://images-na.ssl-images-amazon.com/images/I/61nuuPxUvaL.png" type="image/icon type">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- font-family: 'Rubik', sans-serif; -->
+
+    <script src="https://kit.fontawesome.com/3e4892fa2e.js" crossorigin="anonymous"></script>
+
+</head>
+<body style="font-family: 'Rubik', sans-serif; background-color: #D0EFFF;">
+
+    <nav class="navbar navbar-light" style="background-color: #04396C;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" style="font-weight: 700; font-size: 150%; color: white;">
+            <img src="https://i.pinimg.com/originals/77/0b/80/770b805d5c99c7931366c2e84e88f251.png" alt="" height="5%" width="5%"  class="d-inline-block align-text-right">
+            Weather
+          </a>
+        </div>
+      </nav>
+
+    <div class="container" style="padding:4%;">
+        <div class="row justify-content-center">
+            <form method="post" class="col-md-6 ">
+             {% csrf_token %}
+                    <div class="input-group ">
+                            <input type="text" class="form-control" name="city" placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" style="background-color: #6497B1;">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                    </div>
+            </form>
+        </div>
+
+        <br>
+
+         {% if country_code and coordinate and temp and pressure and humidity %}
+             {% if pressure > 1000 %}
+
+        <div class="row justify-content-center">
+        <div class="card" style="width: 18rem; padding: 0px;">
+            <img src={{link}} class="card-img-top" style="background-color: #6497B1" alt="...">
+            <div class="card-body">
+              <h5 class="card-title" style="font-weight: 700;">{{city}}</h5>
+              <p class="text-muted">Here is some quick analysis for weather in {{city}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Country code : {{country_code}}</li>
+              <li class="list-group-item">Coordinates : {{coordinate}}</li>
+              <li class="list-group-item">Temperature : {{temp}}</li>
+              <li class="list-group-item">Pressure : {{pressure}}</li>
+              <li class="list-group-item">Humidity : {{humidity}}</li>
+                <li class="list-group-item">Description : {{desc}}</li>
+
+            </ul>
+            <div class="card-footer">
+              <a href="https://api.openweathermap.org" class="card-link">Api Info</a>
+            </div>
+          </div>
+          </div>
+        {% endif %}
+        {% else %}
+        <h1>blank</h1>
+     {% endif %}
+
+
+
+    </div>
+
+
+
+</body>
+</html>
